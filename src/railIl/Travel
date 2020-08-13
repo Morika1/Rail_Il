@@ -1,0 +1,58 @@
+package railIl;
+
+public class Travel {
+
+	private Clock startTime;
+	private Clock endTime;
+	private Station startStation;
+	private Station endStation;
+
+	public Travel(String startTime, String endTime, Station startStation, Station endStation) throws Exception { 
+		setTime(startTime);
+		setTime(endTime);
+		this.startStation = startStation;
+		this.endStation = endStation;
+	}
+
+	public Clock getStartTime() {
+		return startTime;
+	}
+
+	public void setTime(String time) throws Exception {
+		if (!(time.contains(":")))
+			throw new IllegalArgumentException("Hours and minutes must be seperate with :");
+
+		String[] parts = time.split(":");
+		this.startTime = new Clock(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+
+	}
+
+	public Clock getEndTime() {
+		return endTime;
+	}
+
+	public Station getStartStation() {
+		return startStation;
+	}
+
+	public void setStartStation(Station startStation) {
+		this.startStation = startStation;
+	}
+
+	public Station getEndStation() {
+		return endStation;
+	}
+
+	public void setEndStation(Station endStation) {
+		this.endStation = endStation;
+	}
+
+	public String toString() {
+		return startStation + ", " + startTime + ", " + endStation + ", " + endTime;
+	}
+
+	public void showTravelDetails() {
+		System.out.println(this.toString());
+	}
+
+}

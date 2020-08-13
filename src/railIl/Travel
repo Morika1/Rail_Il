@@ -7,11 +7,11 @@ public class Travel {
 	private Station startStation;
 	private Station endStation;
 
-	public Travel(String startTime, String endTime, Station startStation, Station endStation) throws Exception { 
+	public Travel(String startTime, String endTime, String startStation, String endStation) throws Exception { 
 		setTime(startTime);
 		setTime(endTime);
-		this.startStation = startStation;
-		this.endStation = endStation;
+		setStartStation(startStation);
+		setEndStation(endStation);
 	}
 
 	public Clock getStartTime() {
@@ -35,16 +35,16 @@ public class Travel {
 		return startStation;
 	}
 
-	public void setStartStation(Station startStation) {
-		this.startStation = startStation;
+	public void setStartStation(String startStation) {
+		this.startStation = new Station(startStation);
 	}
 
 	public Station getEndStation() {
 		return endStation;
 	}
 
-	public void setEndStation(Station endStation) {
-		this.endStation = endStation;
+	public void setEndStation(String endStation) {
+		this.endStation = new Station(endStation);
 	}
 
 	public String toString() {

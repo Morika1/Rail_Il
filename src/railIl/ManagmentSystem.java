@@ -1,22 +1,40 @@
-package rail_IL;
+package railIl;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class ManagmentSystem {
 
-	private Travel[] allTravels;
-	private int numberOfTravels;
-	private final int MAX_NUMBER_OF_TRAVELS=100;
-	
+	private ArrayList<Travel> allTravels;
+
 	public ManagmentSystem() {
-		allTravels=new Travel[MAX_NUMBER_OF_TRAVELS];
-		numberOfTravels=0;
+		allTravels = new ArrayList<Travel>();
 	}
-
-
 
 	public void showTravelList() {
-		for (int i = 0; i < numberOfTravels; i++) {
-			allTravels[i].showTravelDetails();
+		for (int i = 0; i < allTravels.size(); i++) {
+			allTravels.get(i).showTravelDetails();
 		}
-		
 	}
+
+	public void addTravel(Travel travel) {
+		allTravels.add(travel);
+
+	}
+
+	public void sortTravelsByStartTime() {
+		Collections.sort(allTravels);
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer("Travels today are:\n");
+		for (int i = 0; i < allTravels.size(); i++) {
+			sb.append((i + 1) + " " + allTravels.get(i).toString() + "/n");
+		}
+		return sb.toString();
+	}
+
 }

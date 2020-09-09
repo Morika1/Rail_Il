@@ -11,11 +11,8 @@ public class Main {
 		final int EXIT = 9;
 		int option;
 
-
 		ManagmentSystem managmentSystem = new ManagmentSystem();
-		boolean isValidInput=false;
-		
-		
+
 		do {
 			System.out.println("Choose one of the following options: ");
 			System.out.println("1) Typing travel information");
@@ -25,30 +22,17 @@ public class Main {
 
 			switch (option) {
 			case 1:
-				
-				
-				
-				
-				
-				
+
+				boolean isValidInput = false;
 				while (!isValidInput) {
-					System.out.println("Please enter travel's details: Start time");
-					String startTime= scan.next();
-					System.out.println("Start station");
-					String startStation= scan.nextLine();
-					System.out.println("Middle time");
-					String middleTime=scan.next();
-					System.out.println("Intermidate Station");
-					String intermidateStation=scan.nextLine();
-					System.out.println("End time");
-					String endTime= scan.next();
-					System.out.println("End station");
-					String endStation=scan.nextLine();
-					
+
+					System.out.println("How mant stations in total there are in the travel?");
+					int numOfTotalStations = scan.nextInt();
 					try {
-						Travel travel = new Travel(startTime,middleTime,endTime, startStation,intermidateStation, endStation);
+						managmentSystem.addTravel(new Travel(numOfTotalStations, scan));
+
 						isValidInput = true;
-						managmentSystem.addTravel(travel);
+
 					} catch (Exception e) {
 						System.out.println(e.getMessage());
 					}
@@ -67,11 +51,6 @@ public class Main {
 			}
 		} while (option != EXIT);
 
-	
-
 	}
 
 }
-	
-
-

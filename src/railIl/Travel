@@ -3,7 +3,7 @@ package railIl;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Travel implements Comparable<Travel> {
+public class Travel {
 
 	private ArrayList<Station> stations;
 
@@ -23,12 +23,28 @@ public class Travel implements Comparable<Travel> {
 
 	}
 
+	public Travel(ArrayList<Station> stations) {
+		this.stations = stations;
+	}
+
+	public Travel() {
+		this.stations = new ArrayList<Station>();
+	}
+	
+
+
+	public Travel(String startStation, String endStation, String time) throws Exception {
+		this.stations = new ArrayList<Station>();
+		stations.add(new Station(startStation, setTime(time)));
+		stations.add(new Station(endStation));
+	}
+
 	public Clock setTime(String time) throws Exception {
 		if (!(time.contains(":")))
 			throw new Exception("Hours and minutes must be seperate with :");
 
 		String[] parts = time.split(":");
-		Clock c = new Clock(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+		Clock c = new Clock(Integer.parseInt(parts[0]), Integer.parseInt(parts[1].replaceAll(",", "")));
 		return c;
 
 	}
@@ -37,13 +53,18 @@ public class Travel implements Comparable<Travel> {
 		return stations;
 	}
 
+	public int getNumOfStations() {
+		return stations.size();
+	}
+
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		sb.append("Travel details:\n");
-		for (int i = 0; i < stations.size(); i++) {
-			sb.append(stations.get(i).toString());
+		sb.append("Travel details: ");
+		for (int i = 0; i < stations.size()-1; i++) {
+			sb.append(stations.get(i).toString()+ ", ");
 		}
+		sb.append(stations.get(stations.size()-1).toString());
 
 		return sb.toString();
 	}
@@ -52,30 +73,43 @@ public class Travel implements Comparable<Travel> {
 		System.out.println(this.toString());
 	}
 
-	@Override
-	public int compareTo(Travel travel) {
-
-		int startTimeByHours = stations.get(0).getLeavingTime().getHours();
-		int startTimeByMinutes = stations.get(0).getLeavingTime().getMinutes();
-		int objectStartTimeByHours = travel.getStations().get(0).getLeavingTime().getHours();
-		int objectStartTimeByMinutes = travel.getStations().get(0).getLeavingTime().getMinutes();
-
-		if (startTimeByHours < objectStartTimeByHours)
-			return -1;
-
-		else if (startTimeByHours == objectStartTimeByHours) {
-			if (startTimeByMinutes < objectStartTimeByMinutes)
-				return -1;
-
-			if (startTimeByMinutes > objectStartTimeByMinutes)
-				return 1;
-
-			else
-				return 0;
-
-		} else
-			return 1;
+	public void save(StringBuffer sb) {
+		sb.append(stations.size() + "\n");
+		for (int i = 0; i < stations.size(); i++) {
+			stations.get(i).save(sb);
+		}
+		sb.append("\n");
 
 	}
 
+	public int locateStartStation(Travel travel) {
+
+		int index = 0;
+		for (int i = 0; i < stations.size(); i++) {
+			if (stations.get(i).locateStartStation(travel.getStations().get(0)) && i != stations.size() - 1) {
+				index = (i + 1);
+				return index;
+			}
+
+		}
+		return index;
+	}
+
+	public void addStation(String stationName, String time) throws Exception {
+		stations.add(new Station(stationName, setTime(time)));
+
+	}
+
+	public boolean SearchTravel(Travel travel) {
+		if (locateStartStation(travel) != 0) {
+			int index2 = locateStartStation(travel);
+			for (int i = index2; i < stations.size(); i++) {
+				if (stations.get(i).locateEndStation(travel.getStations().get(1)))
+					return true;
+
+			}
+		}
+		return false;
+
+	}
 }

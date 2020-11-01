@@ -1,6 +1,6 @@
 package railIl;
 
-public class Clock  {
+public class Clock {
 
 	private int minutes;
 	private int hours;
@@ -9,9 +9,9 @@ public class Clock  {
 		setHours(hours);
 		setMinutes(minutes);
 	}
-	
+
 	public Clock() throws Exception {
-		this(0,0);
+		this(0, 0);
 	}
 
 	public int getMinutes() {
@@ -20,11 +20,25 @@ public class Clock  {
 
 	public void setMinutes(int minutes) throws Exception {
 		if (minutes < 0 || minutes > 59)
-			 throw new Exception("Minutes can be between 0 to 59");
+			throw new Exception("Minutes can be between 0 to 59");
 
 		else
-		this.minutes = minutes;
-		
+			this.minutes = minutes;
+
+	}
+
+	public boolean compareTime(Clock c1) {
+		if (hours > c1.getHours())
+			return true;
+
+		else if (hours == c1.getHours()) {
+			if (minutes >= c1.getMinutes())
+				return true;
+
+			else
+				return false;
+		} else
+			return false;
 	}
 
 	public int getHours() {
@@ -34,10 +48,10 @@ public class Clock  {
 	public void setHours(int hours) throws Exception {
 		if (hours < 1 || hours > 23)
 			throw new Exception("Hours can be between 1 to 23");
-			
+
 		else
-		this.hours = hours;
-		
+			this.hours = hours;
+
 	}
 
 	public String toSring() {
@@ -52,9 +66,6 @@ public class Clock  {
 			time += minutes;
 		return time;
 	}
-
-	
-
 
 }
 

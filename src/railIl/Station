@@ -2,13 +2,17 @@ package railIl;
 
 public class Station {
 
-	String stationName;
-	Clock leavingTime;
+	private String stationName;
+	private Clock leavingTime;
 
 	public Station(String stationName, Clock leavingTime) {
 		setStationName(stationName);
 		setLeavingTime(leavingTime);
 
+	}
+
+	public Station(String stationName) {
+		setStationName(stationName);
 	}
 
 	public Clock getLeavingTime() {
@@ -29,7 +33,34 @@ public class Station {
 
 	@Override
 	public String toString() {
-		return stationName + ", " + leavingTime.toSring() + ", ";
+		return stationName + ", " + leavingTime.toSring();
 	}
 
+	public void save(StringBuffer sb) {
+		sb.append(stationName + ",\n" + leavingTime.toSring() + ",\n");
+
+	}
+
+	private boolean isTheSameName(Station station) {
+		if (stationName.equalsIgnoreCase(station.getStationName()))
+			return true;
+
+		return false;
+	}
+
+	public boolean locateStartStation(Station startStation) {
+		if (isTheSameName(startStation) && leavingTime.compareTime(startStation.getLeavingTime()))
+			return true;
+
+		return false;
+
+	}
+
+	public boolean locateEndStation(Station endStation) {
+		if (isTheSameName(endStation))
+			return true;
+
+		return false;
+	}
+	
 }

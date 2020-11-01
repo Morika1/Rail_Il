@@ -1,5 +1,7 @@
 package railIl;
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main {
@@ -11,13 +13,14 @@ public class Main {
 		final int EXIT = 9;
 		int option;
 
-		ManagmentSystem managmentSystem = new ManagmentSystem();
+		File file = new File("TravelList.txt");
+		PrintWriter pw = new PrintWriter(file);
+
+		TrainStation trainStation = new TrainStation();
 
 		do {
-			System.out.println("Choose one of the following options: ");
-			System.out.println("1) Typing travel information");
-			System.out.println("2) Show the sorting travel list");
-			System.out.println("9) Exit");
+			System.out.println(
+					"Choose one of the following options:\n1) Typing travel information\n2) Show the sorting travel list\n3)Search travel\n4) Save data\n9) Exit ");
 			option = scan.nextInt();
 
 			switch (option) {
@@ -26,10 +29,10 @@ public class Main {
 				boolean isValidInput = false;
 				while (!isValidInput) {
 
-					System.out.println("How mant stations in total there are in the travel?");
+					System.out.println("How many stations in total there are in the travel?");
 					int numOfTotalStations = scan.nextInt();
 					try {
-						managmentSystem.addTravel(new Travel(numOfTotalStations, scan));
+						trainStation.addTravel(new Travel(numOfTotalStations, scan));
 
 						isValidInput = true;
 
@@ -39,8 +42,22 @@ public class Main {
 				}
 				break;
 			case 2:
-				managmentSystem.sortTravelsByStartTime();
-				managmentSystem.showTravelList();
+				System.out.println(trainStation.showTravelList());
+				break;
+			case 3:
+				System.out.println("What is your start station?");
+				scan.nextLine();
+				String startStation = scan.nextLine();
+				System.out.println("What is your final station?");
+				String endStation = scan.nextLine();
+				System.out.println("What is leaving time?");
+				String time = scan.nextLine();
+
+				System.out.println(trainStation.searchTravel(startStation, endStation, time, "\n"));
+				break;
+			case 4:
+				trainStation.save(pw);
+
 				break;
 			case EXIT:
 				System.out.println("Goodbye :-)");

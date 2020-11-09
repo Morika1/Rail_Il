@@ -1,4 +1,3 @@
-
 import subprocess
 
 from flask import Flask, request
@@ -14,6 +13,5 @@ def rail():
                                     request.args.get('destination'),request.args.get('hour'),request.args.get('minutes')])
 if __name__=="__main__":
    subprocess.run(["javac", "-d", "bin", "src/railil/*.java"])
-   subprocess.run(["javac", "-d", "bin", "src/user/*.java"])
-   
-app.run(port=8000, host="0.0.0.0")
+   subprocess.run(["javac", "-d", "bin", "src/user/*.java"])  
+   app.run(port=8000, host="0.0.0.0")

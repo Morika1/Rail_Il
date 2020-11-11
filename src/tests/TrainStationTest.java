@@ -14,11 +14,11 @@ public class TrainStationTest {
 	public void showTravelListTest1() throws Exception {
 		TrainStation trainStation = createTrainStation();
 		StringBuffer expectedResult = new StringBuffer();
-		expectedResult.append("1 Travel details:\n");
+		expectedResult.append("1 Travel details: ");
 		expectedResult.append("Tel Aviv, 06:00, Raanana, 06:40, Haifa, 07:30, Rosh Pina, 09:00, \n");
-		expectedResult.append("2 Travel details:\n");
+		expectedResult.append("2 Travel details: ");
 		expectedResult.append("Petah Tikva, 06:30, Herzelia, 07:30, Tel Aviv, 08:30, \n");
-		expectedResult.append("3 Travel details:\n");
+		expectedResult.append("3 Travel details: ");
 		expectedResult.append("Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40, \n");
 
 		assertEquals(expectedResult.toString(), trainStation.showTravelList());

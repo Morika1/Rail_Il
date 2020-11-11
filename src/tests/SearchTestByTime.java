@@ -15,9 +15,9 @@ public class SearchTestByTime {
 	@Test
 	public void showTravelListTest1() throws Exception {
 		TrainStation trainStation = createTrainStation();
-		StringBuffer expectedResult = new StringBuffer("Optional travels for you:");
-		expectedResult.append("1 Travel details:\n");
-		expectedResult.append("Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40, \n");
+		StringBuffer expectedResult = new StringBuffer("Optional travels for you:\n");
+		expectedResult.append("1 Travel details: ");
+		expectedResult.append("Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40\n");
 
 		assertEquals(expectedResult.toString(), trainStation.searchTravel("Petah Tikva", "Tel Aviv", "6:40","\n"));
 	}

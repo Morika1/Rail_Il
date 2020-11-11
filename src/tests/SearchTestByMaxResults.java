@@ -16,13 +16,13 @@ public class SearchTestByMaxResults {
 	@Test
 	public void showTravelListTest1() throws Exception {
 		TrainStation trainStation = createTrainStation();
-		StringBuffer expectedResult = new StringBuffer("Optional travels for you:");
-		expectedResult.append("1 Travel details:\n");
-		expectedResult.append("Haifa, 06:00, Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30, \n");
-		expectedResult.append("2 Travel details:\n");
-		expectedResult.append("Petah Tikva, 07:20, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40, \n");
-		expectedResult.append("3 Travel details:\n");
-		expectedResult.append("Petah Tikva, 07:30, Herzelia, 08:30, Tel Aviv, 09:00, \n");
+		StringBuffer expectedResult = new StringBuffer("Optional travels for you:\n");
+		expectedResult.append("1 Travel details: ");
+		expectedResult.append("Haifa, 06:00, Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30\n");
+		expectedResult.append("2 Travel details: ");
+		expectedResult.append("Petah Tikva, 07:20, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40\n");
+		expectedResult.append("3 Travel details: ");
+		expectedResult.append("Petah Tikva, 07:30, Herzelia, 08:30, Tel Aviv, 09:00\n");
 
 		assertEquals(expectedResult.toString(), trainStation.searchTravel("Petah Tikva", "Tel Aviv", "7:00","\n"));
 	}

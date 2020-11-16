@@ -8,11 +8,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class TrainStation  {
+public class TrainStation {
 
 	private ArrayList<Travel> allTravels;
-
-	
 
 	public TrainStation() {
 		allTravels = new ArrayList<Travel>();
@@ -107,7 +105,7 @@ public class TrainStation  {
 	}
 
 	private String printArray(ArrayList<Travel> array, String type) {
-		StringBuffer sb = new StringBuffer("Optional travels for you:"+type);
+		StringBuffer sb = new StringBuffer("Optional travels for you:" + type);
 		for (int i = 0; i < array.size(); i++) {
 			sb.append((i + 1) + " " + array.get(i).toString() + type);
 
@@ -117,10 +115,10 @@ public class TrainStation  {
 	}
 
 	public String searchTravel(String startStation, String endStation, String startTime, String type) throws Exception {
-		if(allTravels.size()==0){
+		if (allTravels.size() == 0) {
 			return "Travel list is empty";
 		}
-		
+
 		Travel travel = new Travel(startStation, endStation, startTime);
 		ArrayList<Travel> selectedTravels = new ArrayList<Travel>();
 		final int MAX_NUM_OF_RES = 3;
@@ -130,11 +128,25 @@ public class TrainStation  {
 			}
 
 		}
+		removeUnrelevantStations(selectedTravels, startStation);
+
 		if (selectedTravels.size() == 0)
 			return "There are no relevant travels for you";
 
 		Collections.sort(selectedTravels, compareByTime);
 		return printArray(selectedTravels, type);
+
+	}
+
+	private void removeUnrelevantStations(ArrayList<Travel> selectedTravels, String startStation) {
+		for (int i = 0; i < selectedTravels.size(); i++) {
+			if (selectedTravels.get(i).checkRelevantIndex(startStation) != 0) {
+				int index = selectedTravels.get(i).checkRelevantIndex(startStation);
+				selectedTravels.get(i).removeUnNeededStations(index);
+
+			}
+
+		}
 
 	}
 

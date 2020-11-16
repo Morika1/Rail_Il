@@ -30,8 +30,6 @@ public class Travel {
 	public Travel() {
 		this.stations = new ArrayList<Station>();
 	}
-	
-
 
 	public Travel(String startStation, String endStation, String time) throws Exception {
 		this.stations = new ArrayList<Station>();
@@ -61,10 +59,10 @@ public class Travel {
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
 		sb.append("Travel details: ");
-		for (int i = 0; i < stations.size()-1; i++) {
-			sb.append(stations.get(i).toString()+ ", ");
+		for (int i = 0; i < stations.size() - 1; i++) {
+			sb.append(stations.get(i).toString() + ", ");
 		}
-		sb.append(stations.get(stations.size()-1).toString());
+		sb.append(stations.get(stations.size() - 1).toString());
 
 		return sb.toString();
 	}
@@ -78,7 +76,7 @@ public class Travel {
 		for (int i = 0; i < stations.size(); i++) {
 			stations.get(i).save(sb);
 		}
-		sb.append("\n");
+		// sb.append("\n");
 
 	}
 
@@ -111,5 +109,21 @@ public class Travel {
 		}
 		return false;
 
+	}
+
+	public int checkRelevantIndex(String startStation) {
+		for (int i = 1; i < stations.size(); i++) {
+			if (stations.get(i).getStationName().equalsIgnoreCase(startStation))
+				return i;
+
+		}
+		return 0;
+	}
+
+	public void removeUnNeededStations(int index) {
+		for (int i = 0; i < index; i++) {
+			stations.remove(i);
+
+		}
 	}
 }

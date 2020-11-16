@@ -18,7 +18,7 @@ public class SearchTestByMaxResults {
 		TrainStation trainStation = createTrainStation();
 		StringBuffer expectedResult = new StringBuffer("Optional travels for you:\n");
 		expectedResult.append("1 Travel details: ");
-		expectedResult.append("Haifa, 06:00, Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30\n");
+		expectedResult.append("Petah Tikva, 07:00, Tel Aviv, 08:00, Herzelia, 08:30\n");
 		expectedResult.append("2 Travel details: ");
 		expectedResult.append("Petah Tikva, 07:20, Tel Aviv, 08:00, Herzelia, 08:30, Haifa, 09:40\n");
 		expectedResult.append("3 Travel details: ");
